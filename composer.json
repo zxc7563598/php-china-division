@@ -1,0 +1,18 @@
+{
+  "name": "hejunjie/china-division",
+  "description": "中华人民共和国行政区划（省/市/区）数据，支持身份证地区码映射，可通过 Composer 引用。",
+  "license": "MIT",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Hejunjie\\ChinaDivision\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "何俊杰",
+      "email": "junjie.he.925@gmail.com"
+    }
+  ],
+  "require": {}
+}
