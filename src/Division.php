@@ -37,7 +37,7 @@ class Division
     }
 
     /**
-     * 获取完整历史地区数据
+     * 获取完整地区变更数据
      * 
      * @return array 
      */
@@ -189,7 +189,7 @@ class Division
     }
 
     /**
-     * 内部加载历史地区 JSON 数据
+     * 内部加载地区变更 JSON 数据
      */
     protected static function loadDiff(): void
     {
