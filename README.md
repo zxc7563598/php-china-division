@@ -4,6 +4,10 @@
 
 数据每隔一段时间会同步更新，支持通过 Composer 安装，也可以直接引用 JSON 文件做处理。
 
+如果你不想要部署，只是想要进行使用，可以 👉 [点击此处进行使用](https://tools.hejunjie.life/#/external/china-division)
+
+支持批量查询
+
 ## 安装方式
 
 ```bash
