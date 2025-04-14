@@ -62,6 +62,15 @@ class Division
      */
     public static function getAddressInfo(string $idNumber, bool $returnUnitsDirectlyUnder = true, string $returnUnknown = '未知'): array
     {
+        // 基础格式校验
+        if (!preg_match('/^\d{17}[\dXx]$/', $idNumber)) {
+            return [
+                'province' => $returnUnknown,
+                'city' => $returnUnknown,
+                'area' => $returnUnknown,
+            ];
+        }
+        // 获取地址信息
         $code = substr($idNumber, 0, 6);
         if (strlen($code) === 6 && substr($code, 4, 2) !== '00') {
             if (empty(self::$data)) {
@@ -93,6 +102,78 @@ class Division
             'province' => $returnUnknown,
             'city' => $returnUnknown,
             'area' => $returnUnknown,
+        ];
+    }
+
+    /**
+     * 根据身份证获取性别信息
+     * 
+     * @param string $idNumber 身份证
+     * 
+     * @return string 性别
+     */
+    public static function getGenderFromIdCard(string $idNumber): string
+    {
+        // 基础格式校验
+        if (!preg_match('/^\d{17}[\dXx]$/', $idNumber)) {
+            return '未知';
+        }
+        return (int)$idNumber[16] % 2 === 1 ? '男' : '女';
+    }
+
+    /**
+     * 校验身份证信息
+     * 
+     * @param string $idNumber 身份证
+     * 
+     * @return bool 是否有效
+     */
+    public static function isValidIdCard(string $idNumber): bool
+    {
+        // 确保身份证格式
+        $idNumber = strtoupper($idNumber);
+        // 基础格式校验
+        if (!preg_match('/^\d{17}[\dXx]$/', $idNumber)) {
+            return false;
+        }
+        // 校验位校验
+        $weights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+        $checksumMap = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
+        // 计算校验和
+        $sum = 0;
+        for ($i = 0; $i < 17; $i++) {
+            $sum += (int) $idNumber[$i] * $weights[$i];
+        }
+        // 比较校验位
+        return $idNumber[17] === $checksumMap[$sum % 11];
+    }
+
+    /**
+     * 根据身份证号获取出生日期（年、月、日）
+     * 
+     * @param string $idNumber 身份证号
+     * 
+     * @return array
+     */
+    public static function getBirthdayFromIdCard(string $idNumber): array
+    {
+        // 基础格式校验
+        if (!preg_match('/^\d{17}[\dXx]$/', $idNumber)) {
+            return [
+                'year' => '',
+                'month' => '',
+                'day' => ''
+            ];
+        }
+        // 从身份证号中提取出生年份、月份、日期
+        $year = substr($idNumber, 6, 4);
+        $month = substr($idNumber, 10, 2);
+        $day = substr($idNumber, 12, 2);
+        // 返回数据
+        return [
+            'year' => (string) $year,
+            'month' => (string) $month,
+            'day' => (string) $day
         ];
     }
 
