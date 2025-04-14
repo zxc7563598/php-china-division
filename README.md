@@ -49,10 +49,22 @@ $diff = Division::getDiff();
 use Hejunjie\ChinaDivision\Division;
 
 // 根据 code 获取对应省市区的信息
-$info = Division::getAddressInfo('510107'); 
+$info = Division::getAddressInfo('11010119960124993X'); 
 
 // 转成级联选择器可用的数据格式（适用于前端省市区联动组件）
 $cascaderData = Division::convertToCascaderData();
+
+// 根据身份证获取性别信息
+$sex = Division::getGenderFromIdCard('11010119960124993X');
+
+// 校验身份证信息
+$isValid = Division::isValidIdCard('11010119960124993X');
+
+// 根据身份证号获取出生日期（年、月、日）
+$birthday = Division::getBirthdayFromIdCard('11010119960124993X');
+
+// 获取分级的城市数据（level_1、level_2、level_3）
+$level = Division::getCityLevels();
 ```
 
 ## 更新说明
