@@ -48,7 +48,7 @@ $diff = Division::getDiff();
 <?php
 use Hejunjie\ChinaDivision\Division;
 
-// 根据 code 获取对应省市区的信息
+// 根据身份证获取对应省市区的信息
 $info = Division::getAddressInfo('11010119960124993X'); 
 
 // 转成级联选择器可用的数据格式（适用于前端省市区联动组件）
