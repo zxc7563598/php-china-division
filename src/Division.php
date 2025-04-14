@@ -178,6 +178,49 @@ class Division
     }
 
     /**
+     * 获取分级的城市数据
+     * 
+     * @return array 返回包含3级城市数据的数组
+     */
+    public static function getCityLevels(): array
+    {
+        if (empty(self::$data)) {
+            self::loadData();
+        }
+        $levels = [
+            'level_1' => [],  // 1级城市
+            'level_2' => [],  // 2级城市
+            'level_3' => [],  // 3级城市
+        ];
+        // 遍历原始数据
+        foreach (self::$data as $key => $name) {
+            $level = null;
+            $pid = null;
+            // 判断并分类
+            if (substr($key, -4) === '0000') {  // 1级城市
+                $level = 'level_1';
+                $pid = '0';
+                $key = substr($key, 0, 2);
+            } elseif (substr($key, -2) === '00') {  // 2级城市
+                $level = 'level_2';
+                $pid = substr($key, 0, 2);  // 2级城市的pid为前4位
+                $key = substr($key, 0, 4);
+            } else {  // 3级城市
+                $level = 'level_3';
+                $pid = substr($key, 0, 4);  // 3级城市的pid为前6位
+            }
+            // 添加到对应级别的城市数据中
+            if ($level) {
+                $levels[$level][$key] = [
+                    'name' => $name,
+                    'pid'  => $pid
+                ];
+            }
+        }
+        return $levels;
+    }
+
+    /**
      * 转换为级联选择器（cascader）格式，常用于前端组件
      * 
      * 该方法仅保障了最低可用性，如果需要提升响应速度与效率，建议调用 getAll() 获取全部数据存储 Redis 自行处理
