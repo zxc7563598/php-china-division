@@ -57,18 +57,21 @@ class Division
      * @param string $idNumber 身份证号码
      * @param bool $returnUnitsDirectlyUnder 是否返回直属行政单位
      * @param string $returnUnknown 未知信息返回内容
+     * @param bool $skip_validation 当递归调用时设置为True以避免重复验证
      * 
      * @return array
      */
-    public static function getAddressInfo(string $idNumber, bool $returnUnitsDirectlyUnder = true, string $returnUnknown = '未知'): array
+    public static function getAddressInfo(string $idNumber, bool $returnUnitsDirectlyUnder = true, string $returnUnknown = '未知', bool $skip_validation = false): array
     {
         // 基础格式校验
-        if (!preg_match('/^\d{17}[\dXx]$/', $idNumber)) {
-            return [
-                'province' => $returnUnknown,
-                'city' => $returnUnknown,
-                'area' => $returnUnknown,
-            ];
+        if (!$skip_validation) {
+            if (!preg_match('/^\d{17}[\dXx]$/', $idNumber)) {
+                return [
+                    'province' => $returnUnknown,
+                    'city' => $returnUnknown,
+                    'area' => $returnUnknown,
+                ];
+            }
         }
         // 获取地址信息
         $code = substr($idNumber, 0, 6);
@@ -86,7 +89,7 @@ class Division
             if (isset(self::$diff[$code])) {
                 $diffAddresses = self::$diff[$code];
                 if (count($diffAddresses) === 1) {
-                    return self::getAddressInfo($diffAddresses[0], $returnUnitsDirectlyUnder, $returnUnknown);
+                    return self::getAddressInfo($diffAddresses[0], $returnUnitsDirectlyUnder, $returnUnknown, true);
                 }
             }
             // 如果无差异数据，寻找历史数据有对应信息，尝试返回
