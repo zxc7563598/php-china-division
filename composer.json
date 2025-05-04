@@ -1,6 +1,6 @@
 {
   "name": "hejunjie/china-division",
-  "description": "中华人民共和国行政区划（省/市/区）数据，支持身份证地区码映射，可通过 Composer 引用。",
+  "description": "Regularly updated dataset of China's administrative divisions with ID-card address parsing. Distributed via Composer and versioned for use in forms, validation, and address-related features",
   "license": "MIT",
   "type": "library",
   "autoload": {
