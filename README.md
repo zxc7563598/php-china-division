@@ -7,7 +7,7 @@
 
 Regularly updated dataset of China's administrative divisions with ID-card address parsing. Distributed via Composer and versioned for use in forms, validation, and address-related features
 
-**This project has been parsed by Zread. If you need a quick overview of the project, you can click on the number of views to view it：[Understand this project](https://zread.ai/zxc7563598/php-china-division)**
+**This project has been parsed by Zread. If you need a quick overview of the project, you can click here to view it：[Understand this project](https://zread.ai/zxc7563598/php-china-division)**
 
 ---
 
