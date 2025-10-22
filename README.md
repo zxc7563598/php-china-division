@@ -15,7 +15,7 @@ This is a nationwide provincial, city, and district division data repository tha
 
 The data is synchronized and updated periodically, supports installation via Composer, and can also be processed by directly referencing the JSON file.
 
-If you don't want to deploy it and just want to use it, you can 👉 [click here to use it](https://tools.hejunjie.life/#/external/china-division).
+If you don't want to deploy it and just want to use it, you can 👉 [click here to use it](https://hejunjie.life/composer/china-division).
 
 It also supports bulk queries.
 
