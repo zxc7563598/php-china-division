@@ -6,9 +6,9 @@ use RuntimeException;
 
 class Division
 {
-    protected static array $data = [];
-    protected static array $history = [];
-    protected static array $diff = [];
+    protected static $data = [];
+    protected static $history = [];
+    protected static $diff = [];
 
     /**
      * 获取完整现行地区数据
@@ -239,13 +239,13 @@ class Division
         foreach (self::$data as $code => $name) {
             $provinceCode = substr($code, 0, 2);
             $cityCode = substr($code, 2, 2);
-            if (str_ends_with($code, '0000')) {
+            if (substr($code, -4) === '0000') {
                 $tree[$provinceCode] = [
                     'code' => $provinceCode,
                     'name' => $name,
                     'children' => []
                 ];
-            } elseif (str_ends_with($code, '00')) {
+            } elseif (substr($code, -2) === '00') {
                 if (!isset($tree[$provinceCode])) {
                     $tree[$provinceCode] = [
                         'code' => $provinceCode,
