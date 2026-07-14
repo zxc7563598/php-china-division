@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Hejunjie\ChinaDivision;
 
 use RuntimeException;
 
 class Division
 {
-    protected static $data = [];
-    protected static $history = [];
-    protected static $diff = [];
+    protected static array $data = [];
+    protected static array $history = [];
+    protected static array $diff = [];
 
     /**
      * 获取完整现行地区数据
@@ -136,7 +138,7 @@ class Division
         // 确保身份证格式
         $idNumber = strtoupper($idNumber);
         // 基础格式校验
-        if (!preg_match('/^\d{17}[\dXx]$/', $idNumber)) {
+        if (!preg_match('/^\d{17}[\dX]$/', $idNumber)) {
             return false;
         }
         // 校验位校验
@@ -296,7 +298,7 @@ class Division
     {
         $file = __DIR__ . '/data.json';
         if (!is_file($file)) {
-            throw new \RuntimeException("China division data file not found.");
+            throw new RuntimeException("China division data file not found.");
         }
         $json = file_get_contents($file);
         self::$data = json_decode($json, true) ?? [];
@@ -309,7 +311,7 @@ class Division
     {
         $file = __DIR__ . '/history.json';
         if (!is_file($file)) {
-            throw new \RuntimeException("China division data file not found.");
+            throw new RuntimeException("China division data file not found.");
         }
         $json = file_get_contents($file);
         self::$history = json_decode($json, true) ?? [];
@@ -322,7 +324,7 @@ class Division
     {
         $file = __DIR__ . '/diff.json';
         if (!is_file($file)) {
-            throw new \RuntimeException("China division data file not found.");
+            throw new RuntimeException("China division data file not found.");
         }
         $json = file_get_contents($file);
         self::$diff = json_decode($json, true) ?? [];
