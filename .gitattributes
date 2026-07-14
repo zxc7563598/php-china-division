@@ -1,0 +1,7 @@
+# Auto-detect text files and normalize line endings
+* text=auto
+
+# Export-ignore: these files are not needed in production installs
+/.github/       export-ignore
+/README.md      export-ignore
+/README.zh-CN.md export-ignore
